@@ -1,0 +1,139 @@
+
+
+{
+    "categories": [
+        {
+            "id": "bst",
+            "label": "Binary Search Tree",
+            "description": "A binary search tree is a binary tree in which each node has a value less than or equal to the value of its left child and greater than or equal to the value of its right child.",
+            "path": "/bst",
+            "type": "bst"
+        },
+        {
+            "id": "sorting",
+            "label": "Sorting",
+            "description": "A sorting algorithm is an algorithm that puts elements of a list in a certain order.",
+            "path": "/sorting",
+            "type": "sorting"
+        },
+        {
+            "id": "topics",
+            "label": "Topics",
+            "description": "Here you can find all the topics that are related to the data structures and algorithms.",
+            "path": "/topics",
+            "type": "topics"
+        }
+    ],
+    "pages": [
+        {
+            "id": "bst",
+            "label": "Binary Search Tree",
+            "category": "bst",
+            "title": "Binary Search Tree",
+            "description": "A binary search tree is a binary tree in which each node has a value less than or equal to the value of its left child and greater than or equal to the value of its right child.",
+            "path": "/binary-search-tree",
+            "type": "bst",
+            "disabled": false
+        },
+        {
+            "id": "avl",
+            "label": "AVL Tree",
+            "category": "bst",
+            "title": "AVL Tree",
+            "description": "An AVL tree is a binary search tree in which the difference between the heights of the left and right subtrees cannot be more than one.",
+            "path": "/avl",
+            "type": "bst",
+            "disabled": true
+        },
+        {
+            "id": "red_black",
+            "label": "Red Black Tree",
+            "category": "bst",
+            "title": "Red Black Tree",
+            "description": "A red black tree is a binary search tree in which each node has a color, either red or black.",
+            "path": "/red_black",
+            "type": "bst",
+            "disabled": true
+        },
+        {
+            "id": "trie",
+            "label": "Trie",
+            "category": "bst",
+            "title": "Trie",
+            "description": "A trie is a tree in which each node has a value, and the value of each node is the value of the node's parent plus the node's value.",
+            "path": "/trie",
+            "type": "bst",
+            "disabled": true
+        },
+        {
+            "id": "b_tree",
+            "label": "B-Tree",
+            "category": "bst",
+            "title": "B-Tree",
+            "description": "A B-tree is a tree in which each node has a value, and the value of each node is the value of the node's parent plus the node's value.",
+            "path": "/b_tree",
+            "type": "bst",
+            "disabled": true
+        },
+        {
+            "id": "merkle_tree",
+            "label": "Merkle Tree",
+            "category": "bst",
+            "title": "Merkle Tree",
+            "description": "A merkle tree is a tree in which each node has a value, and the value of each node is the value of the node's parent plus the node's value.",
+            "path": "/merkle_tree",
+            "type": "bst",
+            "disabled": true
+        },
+        {
+            "id": "consecutive_merkle_tree",
+            "label": "Consecutive Merkle Tree",
+            "category": "bst",
+            "title": "Consecutive Merkle Tree",
+            "description": "A consecutive merkle tree is a tree in which each node has a value, and the value of each node is the value of the node's parent plus the node's value.",
+            "path": "/consecutive_merkle_tree",
+            "type": "bst",
+            "disabled": true
+        },
+        {
+            "id": "quick_sort",
+            "label": "Quick Sort",
+            "category": "sorting",
+            "title": "Quick Sort",
+            "description": "A quick sort is a sorting algorithm that uses a pivot to partition the list into two parts.",
+            "path": "/quick_sort",
+            "type": "sorting",
+            "disabled": true
+        },
+        {
+            "id": "merge_sort",
+            "label": "Merge Sort",
+            "category": "sorting",
+            "title": "Merge Sort",
+            "description": "A merge sort is a sorting algorithm that uses a merge to sort the list.",
+            "path": "/merge_sort",
+            "type": "sorting",
+            "disabled": true
+        },
+        {
+            "id": "tim_sort",
+            "label": "Tim Sort",
+            "category": "sorting",
+            "title": "Tim Sort",
+            "description": "A tim sort is a sorting algorithm that uses a tim to sort the list.",
+            "path": "/tim_sort",
+            "type": "sorting",
+            "disabled": true
+        },
+        {
+            "id": "big_o",
+            "label": "Big O",
+            "category": "topics",
+            "title": "Big O",
+            "description": "Big O is a notation that describes the time complexity of an algorithm.",
+            "path": "/big_o",
+            "type": "topics",
+            "disabled": true
+        }
+    ]
+}
