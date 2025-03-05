@@ -1,37 +1,23 @@
 import type DemoPage from "~/lib/demo_pages.json";
-import * as algorithms from "~/utils/algorithms";
+import algorithmMap from "~/utils/algorithms";
+import BSTDataVisualizer from "./algorithms/bst-data-visualizer";
+import type { BSTNode } from "~/utils/algorithms/bst/binary-search-tree";
 
 export type ExampleViewProps = {
 	page: (typeof DemoPage.pages)[number];
-	initialData: number[];
-	functionURL?: string;
+	initialData?: number[];
 };
-
-// Define a type for the algorithm functions
-type AlgorithmFunction = (data: number[]) => number[];
 
 export default function ExampleView({
 	page,
-	initialData = [20, 14, 3, 1, 15, 10, 11, 7, 5, 12, 4, 8, 9, 13, 6],
-	functionURL,
+	initialData = [50, 30, 70, 20, 40, 60, 80, 10, 25, 35, 45, 55, 65, 75, 85],
 }: ExampleViewProps) {
-	let algorithmFunction: AlgorithmFunction | undefined;
+	const algorithmFunction = algorithmMap[page.function];
 
-	try {
-		// Get the algorithm function based on the page ID
-		algorithmFunction = (algorithms as { [key: string]: AlgorithmFunction })[
-			page.id
-		];
-
-		if (!algorithmFunction) {
-			throw new Error(`Algorithm function ${page.id} not found`);
-		}
-	} catch (error) {
-		console.error("Error loading algorithm:", error);
+	if (!algorithmFunction) {
 		return (
 			<div className="p-4 text-red-500">
-				Error: Algorithm function "{page.id}" not found. Please make sure it is
-				exported in the algorithms directory.
+				Error: Algorithm "{page.function}" is not yet implemented.
 			</div>
 		);
 	}
@@ -42,7 +28,18 @@ export default function ExampleView({
 			<div className="mb-4">
 				<p>{page.description}</p>
 			</div>
-			{/* Add your visualization or execution logic here using algorithmFunction */}
+			{initialData && (
+				<div className="mb-4">
+					<p>Input Data: {initialData.join(", ")}</p>
+				</div>
+			)}
+			{page.type === "bst" &&
+				(() => {
+					const nodes: BSTNode = algorithmFunction(
+						initialData,
+					) as unknown as BSTNode;
+					return <BSTDataVisualizer nodes={nodes} />;
+				})()}
 		</div>
 	);
 }

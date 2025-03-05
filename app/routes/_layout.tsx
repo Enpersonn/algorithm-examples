@@ -1,7 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 import MainSidebar from "~/components/sidebar/main-sidebar";
-import { Button } from "~/components/ui/button";
 import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
 
 export const meta: MetaFunction = () => {
@@ -11,7 +10,7 @@ export const meta: MetaFunction = () => {
 	];
 };
 
-export default function Index() {
+export default function Layout() {
 	return (
 		<SidebarProvider>
 			<MainSidebar />

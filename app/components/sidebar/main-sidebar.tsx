@@ -70,7 +70,9 @@ function MainSidebar() {
 												className="w-full flex justify-normal text-left text-sm"
 												asChild
 											>
-												<Link to={page.path}>{page.label}</Link>
+												<Link to={`/algorithms/${category.id}/${page.id}`}>
+													{page.label}
+												</Link>
 											</Button>
 										</SidebarMenuItem>
 									))}
