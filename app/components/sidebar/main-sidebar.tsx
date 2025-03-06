@@ -53,34 +53,36 @@ function MainSidebar() {
 				<h1>MainSidebar</h1>
 			</SidebarHeader>
 			<SidebarContent>
-				{data?.categories?.map((category) => {
-					const pages = data?.pages?.filter(
-						(page) => page.category === category.id && !page.disabled,
-					);
-					if (pages.length === 0) return null;
-					return (
-						<SidebarGroup key={category.id}>
-							<SidebarGroupLabel>{category.label}</SidebarGroupLabel>
-							<SidebarGroupContent>
-								<div className="ml-4 border-l border-border">
-									{pages.map((page) => (
-										<SidebarMenuItem key={page.id}>
-											<Button
-												variant="ghost"
-												className="w-full flex justify-normal text-left text-sm"
-												asChild
-											>
-												<Link to={`/algorithms/${category.id}/${page.id}`}>
-													{page.label}
-												</Link>
-											</Button>
-										</SidebarMenuItem>
-									))}
-								</div>
-							</SidebarGroupContent>
-						</SidebarGroup>
-					);
-				})}
+				{data?.pages
+					?.filter((page) => page.type === "category")
+					.map((category) => {
+						const pages = data?.pages?.filter(
+							(page) => page.category === category.id && !page.disabled,
+						);
+						if (pages.length === 0) return null;
+						return (
+							<SidebarGroup key={category.id}>
+								<SidebarGroupLabel>{category.label}</SidebarGroupLabel>
+								<SidebarGroupContent>
+									<div className="ml-4 border-l border-border">
+										{pages.map((page) => (
+											<SidebarMenuItem key={page.id}>
+												<Button
+													variant="ghost"
+													className="w-full flex justify-normal text-left text-sm"
+													asChild
+												>
+													<Link to={`/algorithms/${category.id}/${page.id}`}>
+														{page.label}
+													</Link>
+												</Button>
+											</SidebarMenuItem>
+										))}
+									</div>
+								</SidebarGroupContent>
+							</SidebarGroup>
+						);
+					})}
 			</SidebarContent>
 		</Sidebar>
 	);
