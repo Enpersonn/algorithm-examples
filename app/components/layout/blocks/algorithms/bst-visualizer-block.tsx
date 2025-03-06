@@ -31,7 +31,7 @@ export default function BSTVisualizerBlock({
 		e.preventDefault();
 		const formData = new FormData(e.target as HTMLFormElement);
 		const node = bst.searchTree(Number(formData.get("number")));
-		console.log(node);
+		setSearchResult(node);
 	};
 
 	const handleRandomData = () => {
@@ -45,6 +45,31 @@ export default function BSTVisualizerBlock({
 		}
 		setBst(newBst);
 		setData(randomDataArray);
+	};
+
+	const BSTNodeItem = ({
+		node,
+	}: {
+		node: BSTNode;
+	}) => {
+		return (
+			<div
+				className={cn(
+					"flex flex-col items-center p-2 border ",
+					node === searchResult && "bg-green-500",
+				)}
+			>
+				<h2>{node.value}</h2>
+				<div className="flex gap-2">
+					<div className=" bg-muted h-fit">
+						{node.left && <BSTNodeItem node={node.left} />}
+					</div>
+					<div className=" bg-muted-foreground h-fit">
+						{node.right && <BSTNodeItem node={node.right} />}
+					</div>
+				</div>
+			</div>
+		);
 	};
 
 	return (
@@ -77,38 +102,7 @@ export default function BSTVisualizerBlock({
 				</form>
 			</div>
 			<div>data: {data.join(", ")}</div>
-			{bst.root && <BSTNodeItem node={bst.root} searchResult={searchResult} />}
-		</div>
-	);
-}
-
-function BSTNodeItem({
-	node,
-	searchResult,
-}: {
-	node: BSTNode;
-	searchResult: BSTNode | null;
-}) {
-	return (
-		<div
-			className={cn(
-				"flex flex-col items-center p-2 border",
-				node === searchResult && "bg-green-500",
-			)}
-		>
-			<h2>{node.value}</h2>
-			<div className="flex gap-2">
-				<div className="flex flex-col items-center bg-muted h-fit">
-					{node.left && (
-						<BSTNodeItem node={node.left} searchResult={searchResult} />
-					)}
-				</div>
-				<div className="flex flex-col items-center bg-muted-foreground h-fit">
-					{node.right && (
-						<BSTNodeItem node={node.right} searchResult={searchResult} />
-					)}
-				</div>
-			</div>
+			{bst.root && <BSTNodeItem node={bst.root} />}
 		</div>
 	);
 }

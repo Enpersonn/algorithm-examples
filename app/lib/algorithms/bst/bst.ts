@@ -10,16 +10,18 @@ export class BSTNode {
 	}
 
 	getAllValues(): number[] {
-		const values: number[] = [this.value];
-		if (this.left) {
-			values.push(...this.left.getAllValues());
-		}
-		if (this.right) {
-			values.push(...this.right.getAllValues());
-		}
-		return values;
+		return inOrderTraversal(this);
 	}
 }
+
+const inOrderTraversal = (node: BSTNode | null): number[] => {
+	if (!node) return [];
+	return [
+		...inOrderTraversal(node.left),
+		node.value,
+		...inOrderTraversal(node.right),
+	];
+};
 
 class BST_Tree {
 	root: BSTNode | null;
@@ -32,69 +34,63 @@ class BST_Tree {
 		}
 	}
 
-	checkNode(
-		node: BSTNode,
-		value: number,
-	): { node: BSTNode; left: boolean } | null {
-		if (node.value === value) return { node, left: true };
-		if (value < node.value) {
-			if (node.left === null) return { node, left: true };
-
-			return this.checkNode(node.left, value);
-		}
-		if (value > node.value) {
-			if (node.right === null) return { node, left: false };
-
-			return this.checkNode(node.right, value);
-		}
-		return null;
-	}
-
 	dropNode(node: BSTNode | null, value: number): BSTNode | null {
-		if (node === null) return null;
+		if (!node) return null;
+
 		if (value < node.value) {
 			node.left = this.dropNode(node.left, value);
 		} else if (value > node.value) {
 			node.right = this.dropNode(node.right, value);
 		} else {
-			if (node.left === null && node.right === null) {
-				return null;
+			if (!node.left) return node.right;
+			if (!node.right) return node.left;
+
+			let successor = node.right;
+			while (successor.left !== null) {
+				successor = successor.left;
 			}
-			if (node.left === null) {
-				return node.right;
-			}
-			if (node.right === null) {
-				return node.left;
-			}
-			let temp = node.right;
-			while (temp.left !== null) {
-				temp = temp.left;
-			}
-			node.value = temp.value;
-			node.right = this.dropNode(node.right, temp.value);
+			node.value = successor.value;
+			node.right = this.dropNode(node.right, successor.value);
 		}
+
 		return node;
 	}
 
 	addNode(value: number) {
-		if (this.root === null) {
-			this.root = new BSTNode(value);
-		} else {
-			const res = this.checkNode(this.root, value);
-			if (res === null) this.root = new BSTNode(value);
-			if (res?.node.value === value) return;
-			if (res?.left === true) res.node.left = new BSTNode(value);
-			if (res?.left === false) res.node.right = new BSTNode(value);
+		const newNode = new BSTNode(value);
+		if (!this.root) {
+			this.root = newNode;
+			return;
+		}
+
+		let current: BSTNode | null = this.root;
+		while (current) {
+			if (value < current.value) {
+				if (!current.left) {
+					current.left = newNode;
+					return;
+				}
+				current = current.left;
+			} else if (value > current.value) {
+				if (!current.right) {
+					current.right = newNode;
+					return;
+				}
+				current = current.right;
+			} else {
+				return;
+			}
 		}
 	}
 
 	searchTree(value: number) {
-		if (this.root === null) {
-			return null;
+		let current = this.root;
+		while (current) {
+			if (current.value === value) return current;
+			if (value < current.value) current = current.left;
+			else current = current.right;
 		}
-		const res = this.checkNode(this.root, value);
-		if (res === null || res.node.value !== value) return null;
-		return res.node;
+		return null;
 	}
 
 	dropTree() {
@@ -102,6 +98,7 @@ class BST_Tree {
 	}
 
 	removeNode(value: number) {
+		if (!this.root) return null;
 		this.root = this.dropNode(this.root, value);
 	}
 }
