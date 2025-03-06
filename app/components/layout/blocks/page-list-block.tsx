@@ -16,15 +16,17 @@ export default function PageListBlock({
 		);
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-			{Listpages.map((page) => (
-				<Link to={`/algorithms/${page.category}/${page.id}`} key={page.id}>
-					<Card className="hover:bg-muted">
-						<CardHeader>
-							<CardTitle>{page.label}</CardTitle>
-						</CardHeader>
-					</Card>
-				</Link>
-			))}
+			{Listpages.map((page) =>
+				page.disabled ? null : (
+					<Link to={`/algorithms/${page.category}/${page.id}`} key={page.id}>
+						<Card className="hover:bg-muted">
+							<CardHeader>
+								<CardTitle>{page.label}</CardTitle>
+							</CardHeader>
+						</Card>
+					</Link>
+				),
+			)}
 		</div>
 	);
 }
