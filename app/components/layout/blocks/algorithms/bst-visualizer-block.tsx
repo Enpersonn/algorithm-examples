@@ -1,32 +1,113 @@
-import type { BSTNode } from "~/utils/algorithms/bst/binary-search-tree";
 import type { BSTDataVisualizerBlockProps } from "~/types/blocks";
-import BinarySearchTree from "~/utils/algorithms/bst/binary-search-tree";
+import { useState } from "react";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { Button } from "~/components/ui/button";
+import BST_Tree from "~/lib/algorithms/bst/bst";
+import type { BSTNode } from "~/lib/algorithms/bst/bst";
+import { cn } from "~/lib/utils";
 
 export default function BSTVisualizerBlock({
 	initialData,
 }: BSTDataVisualizerBlockProps) {
-	const Tree = BinarySearchTree(initialData);
+	const [bst, setBst] = useState(() => new BST_Tree(initialData));
+	const [data, setData] = useState(initialData);
+	const [searchResult, setSearchResult] = useState<BSTNode | null>(null);
+	const handleAddNode = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const formData = new FormData(e.target as HTMLFormElement);
+		bst.addNode(Number(formData.get("number")));
+		setData(bst.root ? bst.root.getAllValues() : []);
+	};
+
+	const handleRemoveNode = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const formData = new FormData(e.target as HTMLFormElement);
+		bst.removeNode(Number(formData.get("number")));
+		setData(bst.root ? bst.root.getAllValues() : []);
+	};
+
+	const handleSearchNode = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const formData = new FormData(e.target as HTMLFormElement);
+		const node = bst.searchTree(Number(formData.get("number")));
+		console.log(node);
+	};
+
+	const handleRandomData = () => {
+		const randomDataArray = Array.from(
+			{ length: Math.max(5, Math.floor(Math.random() * 25)) },
+			() => Math.floor(Math.random() * 100),
+		);
+		const newBst = new BST_Tree([]);
+		for (let i = 0; i < randomDataArray.length; i++) {
+			newBst.addNode(randomDataArray[i]);
+		}
+		setBst(newBst);
+		setData(randomDataArray);
+	};
 
 	return (
-		<div>
+		<div className="flex flex-col gap-4">
 			<h1>BST Data Visualizer</h1>
-			<BSTNodeItem node={Tree} />
+			<div className="flex flex-col gap-2">
+				<div>
+					<Button onClick={handleRandomData}>Random Data</Button>
+				</div>
+				<form onSubmit={handleAddNode} className="flex gap-2 items-end">
+					<div className="w-full">
+						<Label>Add a number to the tree</Label>
+						<Input type="number" name="number" />
+					</div>
+					<Button type="submit">Add</Button>
+				</form>
+				<form onSubmit={handleRemoveNode} className="flex gap-2 items-end">
+					<div className="w-full">
+						<Label>Remove a number from the tree</Label>
+						<Input type="number" name="number" />
+					</div>
+					<Button type="submit">Remove</Button>
+				</form>
+				<form onSubmit={handleSearchNode} className="flex gap-2 items-end">
+					<div className="w-full">
+						<Label>Search a number in the tree</Label>
+						<Input type="number" name="number" />
+					</div>
+					<Button type="submit">Search</Button>
+				</form>
+			</div>
+			<div>data: {data.join(", ")}</div>
+			{bst.root && <BSTNodeItem node={bst.root} searchResult={searchResult} />}
 		</div>
 	);
 }
 
-function BSTNodeItem({ node }: { node: BSTNode }) {
+function BSTNodeItem({
+	node,
+	searchResult,
+}: {
+	node: BSTNode;
+	searchResult: BSTNode | null;
+}) {
 	return (
-		<div className="flex flex-col p-5 items-center justify-center">
+		<div
+			className={cn(
+				"flex flex-col items-center p-2 border",
+				node === searchResult && "bg-green-500",
+			)}
+		>
 			<h2>{node.value}</h2>
-
-			<div className="grid grid-cols-2 items-start justify-between gap-4 relative ">
-				<div className="absolute flex items-start justify-between px-7 top-0 left-0 w-full h-full">
-					{node.left && <div className="h-1/3 w-[2px] rotate-45 bg-black" />}
-					{node.right && <div className="h-1/3 w-[2px] -rotate-45 bg-black" />}
+			<div className="flex gap-2">
+				<div className="flex flex-col items-center bg-muted h-fit">
+					{node.left && (
+						<BSTNodeItem node={node.left} searchResult={searchResult} />
+					)}
 				</div>
-				<div>{node.left && <BSTNodeItem node={node.left} />}</div>
-				<div>{node.right && <BSTNodeItem node={node.right} />}</div>
+				<div className="flex flex-col items-center bg-muted-foreground h-fit">
+					{node.right && (
+						<BSTNodeItem node={node.right} searchResult={searchResult} />
+					)}
+				</div>
 			</div>
 		</div>
 	);

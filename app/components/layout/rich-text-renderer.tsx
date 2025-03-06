@@ -17,7 +17,9 @@ const getRichTextComponent = (content: RichTextProps) => {
 export default function RichTextRenderer({ content }: RichTextBlockProps) {
 	return (
 		<div className="flex flex-col gap-4">
-			{content.map((content) => getRichTextComponent(content))}
+			{content.map((content) => (
+				<div key={content.id}>{getRichTextComponent(content)}</div>
+			))}
 		</div>
 	);
 }

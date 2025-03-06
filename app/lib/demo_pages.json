@@ -15,6 +15,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "Here you can find all the binary search trees."
                         }
@@ -34,6 +35,26 @@
             ]
         },
         {
+            "id": "hash-tables",
+            "label": "Hash Tree's",
+            "title": "Hash Tree's",
+            "type": "category",
+            "entry": [
+                {
+                    "id": "description",
+                    "type": "rich_text",
+                    "disabled": false,
+                    "content": [
+                        {
+                            "id": "1",
+                            "type": "p",
+                            "content": "Here you can find all the hash tree's."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "id": "sorting",
             "label": "Sorting",
             "type": "category",
@@ -45,6 +66,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "Here you can find all the sorting algorithms."
                         }
@@ -64,6 +86,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "Here you can find all the topics that are related to the data structures and algorithms."
                         }
@@ -86,10 +109,12 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "A binary search tree is a binary tree in which each node has a value less than or equal to the value of its left child and greater than or equal to the value of its right child."
                         },
-                        {
+                            {
+                            "id": "2",
                             "type": "p",
                             "content": "The binary search tree is a binary tree in which each node has a value less than or equal to the value of its left child and greater than or equal to the value of its right child."
                         }
@@ -120,6 +145,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "An AVL tree is a binary search tree in which the difference between the heights of the left and right subtrees cannot be more than one."
                         }
@@ -141,6 +167,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "A red black tree is a binary search tree in which each node has a color, either red or black."
                         }
@@ -162,6 +189,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "A trie is a tree in which each node has a value, and the value of each node is the value of the node's parent plus the node's value."
                         }
@@ -183,6 +211,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "A B-tree is a tree in which each node has a value, and the value of each node is the value of the node's parent plus the node's value."
                         }
@@ -194,7 +223,7 @@
         {
             "id": "merkle_tree",
             "label": "Merkle Tree",
-            "category": "bst",
+            "category": "hash_tables",
             "type": "algorithm",
             "title": "Merkle Tree",
             "entry": [
@@ -204,6 +233,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "A merkle tree is a tree in which each node has a value, and the value of each node is the value of the node's parent plus the node's value."
                         }
@@ -215,7 +245,7 @@
         {
             "id": "consecutive_merkle_tree",
             "label": "Consecutive Merkle Tree",
-            "category": "bst",
+            "category": "hash_tables",
             "type": "algorithm",
             "title": "Consecutive Merkle Tree",
             "entry": [
@@ -225,6 +255,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "A consecutive merkle tree is a tree in which each node has a value, and the value of each node is the value of the node's parent plus the node's value."
                         }
@@ -246,6 +277,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "A quick sort is a sorting algorithm that uses a pivot to partition the list into two parts."
                         }
@@ -267,6 +299,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "A merge sort is a sorting algorithm that uses a merge to sort the list."
                         }
@@ -288,6 +321,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "A tim sort is a sorting algorithm that uses a tim to sort the list."
                         }
@@ -309,6 +343,7 @@
                     "disabled": false,
                     "content": [
                         {
+                            "id": "1",
                             "type": "p",
                             "content": "Big O is a notation that describes the time complexity of an algorithm."
                         }
