@@ -1,10 +1,16 @@
 import type { BSTNode } from "~/utils/algorithms/bst/binary-search-tree";
+import type { BSTDataVisualizerBlockProps } from "~/types/blocks";
+import BinarySearchTree from "~/utils/algorithms/bst/binary-search-tree";
 
-export default function BSTDataVisualizer({ nodes }: { nodes: BSTNode }) {
+export default function BSTVisualizerBlock({
+	initialData,
+}: BSTDataVisualizerBlockProps) {
+	const Tree = BinarySearchTree(initialData);
+
 	return (
 		<div>
 			<h1>BST Data Visualizer</h1>
-			<BSTNodeItem node={nodes} />
+			<BSTNodeItem node={Tree} />
 		</div>
 	);
 }

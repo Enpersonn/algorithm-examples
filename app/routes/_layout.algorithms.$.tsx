@@ -1,26 +1,8 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import Demo_Data from "~/lib/demo_pages.json";
-import { json, useLoaderData } from "@remix-run/react";
-import ExampleView from "~/views/example-view";
-
-type CategoryData = {
-	id: string;
-	label: string;
-	description: string;
-	path: string;
-	type: string;
-};
-
-type PageData = {
-	id: string;
-	label: string;
-	category: string;
-	title: string;
-	description: string;
-	path: string;
-	type: string;
-	disabled: boolean;
-};
+import type { PageProps, CategoryPageProps } from "~/types/page";
+import DynamicPageView from "~/views/dynamic-page-view";
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const path = params["*"]?.split("/");
@@ -30,8 +12,11 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
 	if (category && page_id) {
 		const pageData = Data.pages.find(
-			(page) => page.category === category && page.id === page_id,
-		) as PageData | undefined;
+			(page) =>
+				page.type === "algorithm" &&
+				page.category === category &&
+				page.id === page_id,
+		) as PageProps | undefined;
 
 		if (!pageData) {
 			throw Response.json({ message: "Page not found" }, { status: 404 });
@@ -40,10 +25,11 @@ export async function loader({ params }: LoaderFunctionArgs) {
 		return Response.json(pageData);
 	}
 
-	if (!category) {
-		const pageData = Data.categories.find(
-			(categoryPage) => categoryPage.id === category,
-		) as CategoryData | undefined;
+	if (!page_id) {
+		const pageData = Data.pages.find(
+			(categoryPage) =>
+				categoryPage.type === "category" && categoryPage.id === category,
+		) as CategoryPageProps | undefined;
 
 		if (!pageData) {
 			throw Response.json({ message: "Category not found" }, { status: 404 });
@@ -61,5 +47,5 @@ export async function loader({ params }: LoaderFunctionArgs) {
 export default function AlgorithmsPages() {
 	const data = useLoaderData<typeof loader>();
 
-	return <ExampleView page={data} />;
+	return <DynamicPageView {...data} />;
 }
